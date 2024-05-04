@@ -1,6 +1,6 @@
 # Crack the Hash TryHackMe Tutorial
 
-This is a tutorial on the [Crack the Hash](https://tryhackme.com/r/room/crackthehash) box on TryHackMe.
+This is a tutorial on how to complete the [Crack the Hash](https://tryhackme.com/r/room/crackthehash) box on TryHackMe.
 
 This is a relatively straightforward box that involves cracking a bunch of different hashes. The main tools we'll use are 
 * [Crackstation.net](https://crackstation.net/) - a free website for cracking many types of hashes
@@ -51,13 +51,11 @@ The wildcard in "$2*$" tells me that this might be the right one. I went to the 
 An alternate (and easier) way to figure this out would have been to use hashid tool, which we'll demonstrate in a later task.
 
 ### Step 2 - Filter wordlist for 4-letter words
-The hint tells that the answer is 4 lowercase characters, and that it is also included in the rockyou.txt wordlist. There are probably multiple ways to do this so that cracking this hash won't take super long. 
+The hint says that the answer is 4 lowercase characters, and that it is also included in the rockyou.txt wordlist. There are probably multiple ways to do this so that cracking this hash won't take super long. 
 
-What I did was filter rockyou.txt for 4-character strings and output this to a new file called rockyou2.txt. I used the "awk" command to do this:
+What I did was filter rockyou.txt for 4-character strings and output this to a new file called rockyou2.txt. I used the `awk` command to do this:
 
-`awk 'length($0) == 4' rockyou.txt > rockyou2.txt`
-
-Another way to do this would be to do a hashcat [mask attack](https://hashcat.net/wiki/doku.php?id=mask_attack). 
+`awk 'length($0) == 4' rockyou.txt > rockyou2.txt` 
 
 ### Step 3 - Use hashcat to crack the hash
 Finally, we're going to use a hashcat dictionary attack to crack this. Run the command:
@@ -75,6 +73,8 @@ Run the command...
 
 And after a couple minutes, there's our answer:
 ![image](https://github.com/fatmagician/crack-the-hash/assets/51951855/25c0e72e-4c58-4931-bec8-4b684c35910f)
+
+If you want more practice with hashcat, another way to solve Task 4 would be to do a hashcat [mask attack](https://hashcat.net/wiki/doku.php?id=mask_attack). 
 
 ## Task 5: 279412f945939ba78ce0758d3fd83daa
 That last one took a while. Let's paste this one into Crackstation and see if it works.
@@ -123,6 +123,8 @@ Now `rockyou6.txt` contains only strings that are 6 characters long. In real lif
 
 Hashcat still says it'll take an hour and a half to crack this, but that's much better than 12 hours. Go for a walk and come back in an hour. 
 
+⏲️⏲️⏲️⏲️⏲️
+
 After 33 minutes, we've finally cracked it:
 
 ![image](https://github.com/fatmagician/crack-the-hash/assets/51951855/7593ca11-af05-45a2-a1fe-80c46d74fa7f)
@@ -141,3 +143,9 @@ Hashid gives us a few potential hash algorithms:
 The hint TryHackMe gives us is "HMAC-SHA1." HMAC-SHA1 isn't on the the list of algorithms that hashid returned to us. The hashcat [example hashes page](https://hashcat.net/wiki/doku.php?id=example_hashes) lists a few different salted variations of SHA-1. Without that hint, there would probably be some trial and error in figuring out which one to use. But since we have the hint, we know to use mode 160. Run the following command with hashcat:
 
 `hashcat -a 0 -m 160 task9.txt rockyou.txt`
+
+![image](https://github.com/fatmagician/crack-the-hash/assets/51951855/8641fc34-4e73-4a1c-8103-f9cac602e767)
+
+And Voila! We've completed this room!
+
+I hope you ennjoyed this tutorial and got comfortable using hashcat, hashid, and Crackstation. Happy hunting.
