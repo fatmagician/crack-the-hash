@@ -72,7 +72,7 @@ Run the command...
 ![image](https://github.com/fatmagician/crack-the-hash/assets/51951855/6b04e1ab-a327-4a2b-8f6d-d12901fe4970)
 
 And after a couple minutes, there's our answer:
-![image](https://github.com/fatmagician/crack-the-hash/assets/51951855/25c0e72e-4c58-4931-bec8-4b684c35910f)
+![image](https://github.com/fatmagician/crack-the-hash/assets/51951855/b5b4d8e9-b1d9-4fe0-9d5e-c430c9132eec)
 
 If you want more practice with hashcat, another way to solve Task 4 would be to do a hashcat [mask attack](https://hashcat.net/wiki/doku.php?id=mask_attack). 
 
